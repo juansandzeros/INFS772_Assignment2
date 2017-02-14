@@ -44,6 +44,29 @@ def read_m_by_rating(first_year, last_year, num_of_m=50):
         """ Your code here. now we are done with processing a movie, increment count
          check if we have processed num_of_m movies (if count == num_of_m)? if so, break."""
     '''
+    for movie in movies:   
+        dict_each_movie = {}
+    
+        rank = movie.find("span","lister-item-index").contents[0]
+        rank = rank.encode("ascii","ignore")
+        dict_each_movie["rank"] = rank.replace(".","").strip()
+
+        title = movie.find("div","col-title").find("a").contents[0]
+        title = title.encode("ascii","ignore")
+        dict_each_movie["title"] = title.replace(",","").strip()
+
+        year = movie.find("span","lister-item-year").contents[0]
+        year = year.encode("ascii","ignore")
+        dict_each_movie["year"] = year.strip()
+     
+        rating = movie.find("div","col-imdb-rating").find("strong").contents[0]
+        rating = rating.encode("ascii","ignore")
+        dict_each_movie["rating"] = rating.strip()
+
+        list_movies.append(dict_each_movie)
+        count += 1
+        if count == num_of_m:
+            break
     return list_movies
 
 
@@ -58,12 +81,14 @@ def write_movies_csv(list_movies, filename):
     '''
     Your code here: write lis (a list of strings) to a file with filaname. Please remember to close the file when you are done
     '''
+    with open(filename, mode='wb') as f:
+        f.write('\n'.join(lis))
 
 
 def main():
-    print read_m_by_rating('2005','2015',11) # Output: [{'rating': '10', 'year': '2015', 'rank': '1', 'title': 'Captives'}, {'rating': '10', 'year': '2015', 'rank': '2', 'title': 'In the Park'}, {'rating': '10', 'year': '2014', 'rank': '3', 'title': 'Lacrimosa'}, {'rating': '9.8', 'year': '2015', 'rank': '4', 'title': 'Till We Meet Again'}, {'rating': '9.8', 'year': '2015', 'rank': '5', 'title': 'Beneath the Old Dark House'}, {'rating': '9.8', 'year': '2013', 'rank': '6', 'title': 'Bestie!'}, {'rating': '9.8', 'year': '2015', 'rank': '7', 'title': "Sizzler '77"}, {'rating': '9.8', 'year': '2015', 'rank': '8', 'title': 'Defenders of Life'}, {'rating': '9.8', 'year': '2011', 'rank': '9', 'title': 'Walk a Mile'}, {'rating': '9.8', 'year': '2010', 'rank': '10', 'title': 'Brente popcorn'}, {'rating': '9.8', 'year': '2014', 'rank': '11', 'title': 'Circa Survive: Live at the Shrine'}]
+    #print read_m_by_rating('2005','2015',11) # Output: [{'rating': '10', 'year': '2015', 'rank': '1', 'title': 'Captives'}, {'rating': '10', 'year': '2015', 'rank': '2', 'title': 'In the Park'}, {'rating': '10', 'year': '2014', 'rank': '3', 'title': 'Lacrimosa'}, {'rating': '9.8', 'year': '2015', 'rank': '4', 'title': 'Till We Meet Again'}, {'rating': '9.8', 'year': '2015', 'rank': '5', 'title': 'Beneath the Old Dark House'}, {'rating': '9.8', 'year': '2013', 'rank': '6', 'title': 'Bestie!'}, {'rating': '9.8', 'year': '2015', 'rank': '7', 'title': "Sizzler '77"}, {'rating': '9.8', 'year': '2015', 'rank': '8', 'title': 'Defenders of Life'}, {'rating': '9.8', 'year': '2011', 'rank': '9', 'title': 'Walk a Mile'}, {'rating': '9.8', 'year': '2010', 'rank': '10', 'title': 'Brente popcorn'}, {'rating': '9.8', 'year': '2014', 'rank': '11', 'title': 'Circa Survive: Live at the Shrine'}]
                                              # You don't need to have the exact same output, but should have similar results
-    li= read_m_by_rating("2005", "2016", 45)
+    li = read_m_by_rating("2005", "2016", 45)
     write_movies_csv(li,"movies.csv") # your movie.csv file should look like the following
     """
     rank,title,year,rating

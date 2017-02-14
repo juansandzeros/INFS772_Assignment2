@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>a9934158-c0b6-4682-83ba-109bbab9bbc8</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>numpy_practice.py</StartupFile>
+    <StartupFile>imdb.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
