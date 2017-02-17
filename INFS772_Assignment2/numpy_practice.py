@@ -29,7 +29,8 @@ def main():
     '''
     # 3. create a 10*10 numpy arrays of zeros and then frame it with a border of ones. Please do not use numpy.array() to directly create such a 2d array
     # You need to use method such as numpy.zero(), numpy.row_stack(), etc.
-    c = np.zeros((10,10))
+    c = np.ones((10,10))
+    c[1:-1,1:-1] = 0
     print c
     ''' your code here...
     Your code should print:

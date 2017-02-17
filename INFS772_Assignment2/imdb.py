@@ -46,23 +46,23 @@ def read_m_by_rating(first_year, last_year, num_of_m=50):
     '''
     for movie in movies:   
         dict_each_movie = {}
-    
+        # find the rank of each movie
         rank = movie.find("span","lister-item-index").contents[0]
         rank = rank.encode("ascii","ignore")
         dict_each_movie["rank"] = rank.replace(".","").strip()
-
+        # find the title of each movie
         title = movie.find("div","col-title").find("a").contents[0]
         title = title.encode("ascii","ignore")
         dict_each_movie["title"] = title.replace(",","").strip()
-
+        # find the year of each movie
         year = movie.find("span","lister-item-year").contents[0]
         year = year.encode("ascii","ignore")
         dict_each_movie["year"] = year.strip()
-     
+        # find the rating of each movie
         rating = movie.find("div","col-imdb-rating").find("strong").contents[0]
         rating = rating.encode("ascii","ignore")
         dict_each_movie["rating"] = rating.strip()
-
+        # add each movie to a list
         list_movies.append(dict_each_movie)
         count += 1
         if count == num_of_m:
