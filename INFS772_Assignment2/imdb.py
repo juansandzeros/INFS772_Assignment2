@@ -63,10 +63,10 @@ def read_m_by_rating(first_year, last_year, num_of_m=50):
         rating = rating.encode("ascii","ignore")
         dict_each_movie["rating"] = rating.strip()
         # add each movie to a list
-        list_movies.append(dict_each_movie)
-        count += 1
-        if count == num_of_m:
+        list_movies.append(dict_each_movie)     
+        if count == (num_of_m-1):
             break
+        count += 1
     return list_movies
 
 
